@@ -1,13 +1,19 @@
 FORMAT: 1A
 HOST: https://servicesps.bcbsnc.com/
 
-# eligibility_sample
+# Member Eligibility Test
 
 Eligbility sample api for testing 
 
-## Questions Collection [/claims]
+## Eligibility Collection [/members/{id}/v1/eligibility?{enrollmentEffectiveDate},&{enrollmentExpirationDate}]
 
-### Get Claims [GET]
++ Parameters
+
+     + id: YPN1234567890 (string) - The external ID of the member.
+     + enrollmentEffectiveDate: `2016-01-01` - (string) Policy effective date 
+     + enrollmentExpirationDate: `2016-12-31` - (string) policy expiration date  
+
+### Get Eligibility [GET]
 
 + Response 200 (application/json)
 
@@ -43,48 +49,71 @@ Eligbility sample api for testing
 
     + Body
     
-            {
-            "claimsStatus":
-            [
-            {"member":
-            [{"givenName":"Bob","middleName":"A",
-            "familyName":"CAHOON",
-            "birthDate":"1984-01-17",
-            "externalSourceId":"W5552393201",
-            "genderCode":"M",
-            "socialSecurityNumber":"123456789",
-            "sourceSystemMemberId":"11115559101",
-            "subscriberRelationshipDescription":"Subscriber",
-            "fakeAttrib":"fake", 
-            "subscriberRelationshipCode":"SUB",
-            "group":
-            [{"groupName":"LANCE,INC.",
-            "groupNumber":"008947"}],
-            "policy":[{"lineOfBusinessCode":"PPO1",
-            "memberOnExchangeIndicator":"N",
-            "productOffering":[{"benefitOptionGroupTypeCode":"DRU;MED;MTH;SAB"}],
-            "lineOfBusinessDescription":"Blue Options"}],
-            "policyMemberShip":
-            [{
-            "enrollmentEffectiveDate":"2011-01-01",
-            "enrollmentExpirationDate":"2011-03-11"
-            }
-            ],
-            "memberContact":
-            [{"enrolledMemberAddress":
-            [
-            {"addressLine1":"555 JACK WAY",
-            "cityName":"DAYTON",
-            "stateCode":"OH",
-            "postalCode":"45458"}],
-            "enrolledMemberPhone":[{}],
-            "enrolledMemberEmail":[{}]
-            }
-            ]
-            }
-            ]
-            }
-            ]
+            {  
+               "eligibilityBenefits":[  
+                  {  
+                     "member":[  
+                        {  
+                           "givenName":"PAUL",
+                           "middleName":"A",
+                           "familyName":"CAHOON",
+                           "birthDate":"1984-01-17",
+                           "externalSourceId":"W5552393201",
+                           "genderCode":"M",
+                           "socialSecurityNumber":"123456789",
+                           "sourceSystemMemberId":"11115559101",
+                           "subscriberRelationshipDescription":"Subscriber",
+                           "subscriberRelationshipCode":"SUB",
+                           "group":[  
+                              {  
+                                 "groupName":"LANCE, INC.",
+                                 "groupNumber":"008947"
+                              }
+                           ],
+                           "policy":[  
+                              {  
+                                 "lineOfBusinessCode":"PPO1",
+                                 "memberOnExchangeIndicator":"N",
+                                 "productOffering":[  
+                                    {  
+                                       "benefitOptionGroupTypeCode":"DRU;MED;MTH;SAB"
+                                    }
+                                 ],
+                                 "lineOfBusinessDescription":"Blue Options"
+                              }
+                           ],
+                           "policyMemberShip":[  
+                              {  
+                                 "enrollmentEffectiveDate":"2011-01-01",
+                                 "enrollmentExpirationDate":"2011-03-11"
+                              }
+                           ],
+                           "memberContact":[  
+                              {  
+                                 "enrolledMemberAddress":[  
+                                    {  
+                                       "addressLine1":"555 JACK WAY",
+                                       "cityName":"DAYTON",
+                                       "stateCode":"OH",
+                                       "postalCode":"45458"
+                                    }
+                                 ],
+                                 "enrolledMemberPhone":[  
+                                    {  
+            
+                                    }
+                                 ],
+                                 "enrolledMemberEmail":[  
+                                    {  
+            
+                                    }
+                                 ]
+                              }
+                           ]
+                        }
+                     ]
+                  }
+               ]
             }
 
     + Schema
@@ -93,7 +122,7 @@ Eligbility sample api for testing
               "$schema": "http://json-schema.org/draft-04/schema#",
               "type": "object",
               "properties": {
-                "claimsStatus": {
+                "eligibilityBenefits": {
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -128,9 +157,6 @@ Eligbility sample api for testing
                               "type": "string"
                             },
                             "subscriberRelationshipDescription": {
-                              "type": "string"
-                            },
-                            "fakeAttrib": {
                               "type": "string"
                             },
                             "subscriberRelationshipCode": {
@@ -273,7 +299,6 @@ Eligbility sample api for testing
                             "socialSecurityNumber",
                             "sourceSystemMemberId",
                             "subscriberRelationshipDescription",
-                            "fakeAttrib",
                             "subscriberRelationshipCode",
                             "group",
                             "policy",
@@ -290,6 +315,6 @@ Eligbility sample api for testing
                 }
               },
               "required": [
-                "claimsStatus"
+                "eligibilityBenefits"
               ]
             }
